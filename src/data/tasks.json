@@ -1,0 +1,322 @@
+[
+  {
+    "id": 1,
+    "title": "Afiș pentru Ziua Porților Deschise",
+    "status": "in_progress",
+    "assigneeId": 13,
+    "deadline": "2026-12-09",
+    "points": 20
+  },
+  {
+    "id": 2,
+    "title": "Raport financiar lunar",
+    "status": "todo",
+    "assigneeId": 16,
+    "deadline": "2026-11-29",
+    "points": 15
+  },
+  {
+    "id": 3,
+    "title": "Organizare training Git",
+    "status": "todo",
+    "assigneeId": 11,
+    "deadline": "2026-10-15",
+    "points": 25
+  },
+  {
+    "id": 4,
+    "title": "Postare Instagram despre recrutări",
+    "status": "todo",
+    "assigneeId": null,
+    "deadline": "2026-10-22",
+    "points": 25
+  },
+  {
+    "id": 5,
+    "title": "Inventar materiale birou",
+    "status": "in_progress",
+    "assigneeId": 6,
+    "deadline": "2026-11-08",
+    "points": 15
+  },
+  {
+    "id": 6,
+    "title": "Formular de feedback pentru eveniment",
+    "status": "done",
+    "assigneeId": 11,
+    "deadline": "2026-10-02",
+    "points": 20
+  },
+  {
+    "id": 7,
+    "title": "Actualizare listă parteneri",
+    "status": "cancelled",
+    "assigneeId": 18,
+    "deadline": null,
+    "points": 10
+  },
+  {
+    "id": 8,
+    "title": "Rezervare sală pentru ședință",
+    "status": "todo",
+    "assigneeId": null,
+    "deadline": "2026-10-04",
+    "points": 20
+  },
+  {
+    "id": 9,
+    "title": "Traducere broșură în engleză",
+    "status": "in_progress",
+    "assigneeId": 7,
+    "deadline": "2026-11-09",
+    "points": 20
+  },
+  {
+    "id": 10,
+    "title": "Newsletter de noiembrie",
+    "status": "in_progress",
+    "assigneeId": 12,
+    "deadline": "2026-10-10",
+    "points": 5
+  },
+  {
+    "id": 11,
+    "title": "Mentenanță site OSUBB",
+    "status": "todo",
+    "assigneeId": 5,
+    "deadline": "2026-11-17",
+    "points": 10
+  },
+  {
+    "id": 12,
+    "title": "Interviuri pentru recruți",
+    "status": "cancelled",
+    "assigneeId": 1,
+    "deadline": null,
+    "points": 10
+  },
+  {
+    "id": 13,
+    "title": "Buget pentru Gala Voluntarilor",
+    "status": "done",
+    "assigneeId": 18,
+    "deadline": "2026-11-11",
+    "points": 20
+  },
+  {
+    "id": 14,
+    "title": "Fotografii de la Balul Bobocilor",
+    "status": "done",
+    "assigneeId": 16,
+    "deadline": "2026-10-24",
+    "points": 30
+  },
+  {
+    "id": 15,
+    "title": "Ghid pentru voluntari noi",
+    "status": "done",
+    "assigneeId": null,
+    "deadline": "2026-12-05",
+    "points": 10
+  },
+  {
+    "id": 16,
+    "title": "Sondaj despre cămine",
+    "status": "in_progress",
+    "assigneeId": 18,
+    "deadline": "2026-10-20",
+    "points": 30
+  },
+  {
+    "id": 17,
+    "title": "Contract cu sponsorul principal",
+    "status": "in_progress",
+    "assigneeId": 20,
+    "deadline": "2026-10-13",
+    "points": 5
+  },
+  {
+    "id": 18,
+    "title": "Planificare campanie de iarnă",
+    "status": "todo",
+    "assigneeId": 5,
+    "deadline": "2026-10-17",
+    "points": 5
+  },
+  {
+    "id": 19,
+    "title": "Prezentare pentru Adunarea Generală",
+    "status": "todo",
+    "assigneeId": 8,
+    "deadline": "2026-10-03",
+    "points": 30
+  },
+  {
+    "id": 20,
+    "title": "Backup documente Drive",
+    "status": "done",
+    "assigneeId": 14,
+    "deadline": "2026-10-20",
+    "points": 10
+  },
+  {
+    "id": 21,
+    "title": "Video de prezentare a departamentului",
+    "status": "done",
+    "assigneeId": 19,
+    "deadline": null,
+    "points": 5
+  },
+  {
+    "id": 22,
+    "title": "Listă de prezență la training",
+    "status": "done",
+    "assigneeId": 14,
+    "deadline": "2026-10-11",
+    "points": 10
+  },
+  {
+    "id": 23,
+    "title": "Comandă tricouri OSUBB",
+    "status": "cancelled",
+    "assigneeId": null,
+    "deadline": "2026-10-06",
+    "points": 20
+  },
+  {
+    "id": 24,
+    "title": "Mail către decanate",
+    "status": "done",
+    "assigneeId": 8,
+    "deadline": null,
+    "points": 5
+  },
+  {
+    "id": 25,
+    "title": "Corectură regulament intern",
+    "status": "done",
+    "assigneeId": 7,
+    "deadline": "2026-11-02",
+    "points": 15
+  },
+  {
+    "id": 26,
+    "title": "Stand la Târgul de Cariere",
+    "status": "done",
+    "assigneeId": 20,
+    "deadline": "2026-11-08",
+    "points": 30
+  },
+  {
+    "id": 27,
+    "title": "Statistici participare evenimente",
+    "status": "cancelled",
+    "assigneeId": 20,
+    "deadline": "2026-12-09",
+    "points": 20
+  },
+  {
+    "id": 28,
+    "title": "Configurare formular de înscriere",
+    "status": "todo",
+    "assigneeId": 2,
+    "deadline": "2026-11-16",
+    "points": 5
+  },
+  {
+    "id": 29,
+    "title": "Design badge-uri pentru eveniment",
+    "status": "todo",
+    "assigneeId": 15,
+    "deadline": null,
+    "points": 30
+  },
+  {
+    "id": 30,
+    "title": "Raport de activitate trimestrial",
+    "status": "done",
+    "assigneeId": 6,
+    "deadline": "2026-11-02",
+    "points": 20
+  },
+  {
+    "id": 31,
+    "title": "Sesiune de team building",
+    "status": "cancelled",
+    "assigneeId": 15,
+    "deadline": "2026-11-29",
+    "points": 20
+  },
+  {
+    "id": 32,
+    "title": "Arhivare proiecte 2025",
+    "status": "in_progress",
+    "assigneeId": 6,
+    "deadline": "2026-10-27",
+    "points": 20
+  },
+  {
+    "id": 33,
+    "title": "Calendar evenimente decembrie",
+    "status": "todo",
+    "assigneeId": 7,
+    "deadline": "2026-10-11",
+    "points": 5
+  },
+  {
+    "id": 34,
+    "title": "Ofertă pentru tipografie",
+    "status": "in_progress",
+    "assigneeId": 1,
+    "deadline": "2026-12-15",
+    "points": 15
+  },
+  {
+    "id": 35,
+    "title": "Workshop despre CV",
+    "status": "in_progress",
+    "assigneeId": 6,
+    "deadline": "2026-12-01",
+    "points": 25
+  },
+  {
+    "id": 36,
+    "title": "Actualizare pagină Facebook",
+    "status": "in_progress",
+    "assigneeId": 19,
+    "deadline": "2026-11-05",
+    "points": 10
+  },
+  {
+    "id": 37,
+    "title": "Plan de comunicare pentru cămine",
+    "status": "todo",
+    "assigneeId": 5,
+    "deadline": "2026-10-24",
+    "points": 10
+  },
+  {
+    "id": 38,
+    "title": "Evaluare voluntari semestrul I",
+    "status": "done",
+    "assigneeId": 12,
+    "deadline": "2026-11-26",
+    "points": 30
+  },
+  {
+    "id": 39,
+    "title": "Concurs de logo",
+    "status": "cancelled",
+    "assigneeId": 13,
+    "deadline": "2026-10-17",
+    "points": 25
+  },
+  {
+    "id": 40,
+    "title": "Testare aplicație pe telefon",
+    "status": "done",
+    "assigneeId": 11,
+    "deadline": "2026-10-01",
+    "points": 5
+  }
+]

@@ -1,0 +1,22 @@
+[
+  { "id": 1, "name": "Ștefan Pop", "nickname": "Ștefi", "department": "IT", "role": "Voluntar Activ" },
+  { "id": 2, "name": "Ioana Mureșan", "nickname": null, "department": "Educațional", "role": "Voluntar" },
+  { "id": 3, "name": "Andrei Câmpean", "nickname": "Câmpi", "department": "Imagine & PR", "role": "Voluntar Activ" },
+  { "id": 4, "name": "Mădălina Rus", "nickname": "Mădă", "department": "Resurse Umane", "role": "BCE" },
+  { "id": 5, "name": "Vlad Oprea", "nickname": null, "department": "Financiar", "role": "Recrut" },
+  { "id": 6, "name": "Bianca Țurcanu", "nickname": "Bibi", "department": "IT", "role": "Voluntar" },
+  { "id": 7, "name": "Radu Iliescu", "nickname": null, "department": "Educațional", "role": "Voluntar Activ" },
+  { "id": 8, "name": "Alexandra Dobrescu", "nickname": "Alex", "department": "Imagine & PR", "role": "Recrut" },
+  { "id": 9, "name": "Mihai Sârbu", "nickname": "Mișu", "department": "IT", "role": "BCE" },
+  { "id": 10, "name": "Daria Pușcaș", "nickname": null, "department": "Resurse Umane", "role": "Voluntar" },
+  { "id": 11, "name": "Cosmin Bălan", "nickname": "Cosmi", "department": "Financiar", "role": "Voluntar Activ" },
+  { "id": 12, "name": "Raluca Nistor", "nickname": null, "department": "Educațional", "role": "Recrut" },
+  { "id": 13, "name": "Tudor Vlaicu", "nickname": "Tudi", "department": "IT", "role": "Recrut" },
+  { "id": 14, "name": "Irina Șandor", "nickname": null, "department": "Imagine & PR", "role": "Voluntar" },
+  { "id": 15, "name": "Paul Moldovan", "nickname": "Pauli", "department": "Resurse Umane", "role": "Voluntar Activ" },
+  { "id": 16, "name": "Sara Ungureanu", "nickname": null, "department": "Financiar", "role": "Voluntar" },
+  { "id": 17, "name": "Gabriel Toma", "nickname": "Gabi", "department": "Educațional", "role": "BCE" },
+  { "id": 18, "name": "Ana Crăciun", "nickname": "Ani", "department": "IT", "role": "Voluntar" },
+  { "id": 19, "name": "Lucian Ardelean", "nickname": null, "department": "Imagine & PR", "role": "BCE" },
+  { "id": 20, "name": "Elena Florea", "nickname": "Lena", "department": "Resurse Umane", "role": "Recrut" }
+]
