@@ -14,7 +14,7 @@ type Tab = 'tasks' | 'volunteers' | 'leaderboard';
 const tabs: { id: Tab; label: string }[] = [
   { id: 'tasks', label: 'Taskuri' },
   { id: 'volunteers', label: 'Voluntari' },
-  { id: 'leaderboard', label: 'Clasamnet' },
+  { id: 'leaderboard', label: 'Clasament' },
 ];
 
 export default function App() {
