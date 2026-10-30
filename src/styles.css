@@ -110,19 +110,15 @@ body {
   font-size: 1.05rem;
 }
 
-.task-card {
-  min-width: 480px;
-}
-
 .card-top {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  gap: 12px;
 }
 
 .task-title {
-  white-space: nowrap;
+  min-width: 0;
+  white-space: normal;
 }
 
 .task-meta {
