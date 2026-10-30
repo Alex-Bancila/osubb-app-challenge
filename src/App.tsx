@@ -26,7 +26,7 @@ export default function App() {
       <header className="app-header">
         <h1>Mini Task Tracker</h1>
         <p className="app-subtitle">
-          Echipa IT OSUBB · {tasks.length} taskuri · {tasks.length} voluntari
+          Echipa IT OSUBB · {tasks.length} taskuri · {volunteers.length} voluntari
         </p>
       </header>
 
