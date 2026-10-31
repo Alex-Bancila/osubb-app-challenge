@@ -13,6 +13,7 @@ export function filterByStatus(tasks: readonly Task[], status: StatusFilter): Ta
  * and a task that is finished (done or cancelled) is never overdue.
  */
 export function isOverdue(task: Task, today: Date): boolean {
+  if (task.status === 'done' || task.status === 'cancelled') return false;
   if (task.deadline === null) return false;
   return daysUntil(task.deadline, today) < 0;
 }
