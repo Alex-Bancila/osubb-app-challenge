@@ -12,6 +12,8 @@ const filters: { value: StatusFilter; label: string }[] = [
   { value: 'cancelled', label: 'Anulate' },
 ];
 
+const statusStorageKey = 'task-status-filter';
+
 interface TaskListProps {
   tasks: readonly Task[];
   volunteers: readonly Volunteer[];
@@ -19,7 +21,16 @@ interface TaskListProps {
 }
 
 export function TaskList({ tasks, volunteers, today }: TaskListProps) {
-  const [status, setStatus] = useState<StatusFilter>('all');
+  const [status, setStatus] = useState<StatusFilter>(() => {
+    const saved = localStorage.getItem(statusStorageKey);
+    return filters.find((filter) => filter.value === saved)?.value ?? 'all';
+  });
+
+  const changeStatus = (value: StatusFilter) => {
+    setStatus(value);
+    localStorage.setItem(statusStorageKey, value);
+  };
+
   const shown = sortByDeadline(filterByStatus(tasks, status));
   const nameOf = (id: number | null) => {
     const volunteer = volunteers.find((v) => v.id === id);
@@ -30,7 +41,7 @@ export function TaskList({ tasks, volunteers, today }: TaskListProps) {
     <section>
       <label className="field">
         <span>Status</span>
-        <select value={status} onChange={(event) => setStatus(event.target.value as StatusFilter)}>
+        <select value={status} onChange={(event) => changeStatus(event.target.value as StatusFilter)}>
           {filters.map((filter) => (
             <option key={filter.value} value={filter.value}>
               {filter.label}
