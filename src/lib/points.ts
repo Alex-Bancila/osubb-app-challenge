@@ -19,6 +19,21 @@ export function pointsByVolunteer(tasks: readonly Task[]): Map<number, number> {
   return totals;
 }
 
+/** Points earned by departament */
+export function pointsByDepartment(volunteers: readonly Volunteer[], tasks: readonly Task[]): { department: string; points: number }[] {
+  const volunteerTotals = pointsByVolunteer(tasks);
+  const totals = new Map<string, number>();
+  for (const volunteer of volunteers) {
+    totals.set(
+      volunteer.department,
+      (totals.get(volunteer.department) ?? 0) + (volunteerTotals.get(volunteer.id) ?? 0),
+    );
+  }
+  return [...totals]
+    .map(([department, points]) => ({ department, points }))
+    .sort((a, b) => b.points - a.points || a.department.localeCompare(b.department, 'ro'));
+}
+
 /** Every volunteer with their points, most points first, then by name. */
 export function leaderboard(
   volunteers: readonly Volunteer[],
