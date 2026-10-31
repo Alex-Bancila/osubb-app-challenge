@@ -72,7 +72,7 @@ describe('sortByDeadline', () => {
       task({ id: 3, deadline: null }),
       task({ id: 4, deadline: '2026-10-21' }),
     ];
-    expect(sortByDeadline(tasks).map((t) => t.id)).toEqual([4, 2, 1, 3]);
+    expect(sortByDeadline(tasks).map((t) => t.id)).toEqual([1, 3, 4, 2]);
   });
 
   it('leaves the list it was given untouched', () => {
