@@ -13,7 +13,7 @@ export function pointsByVolunteer(tasks: readonly Task[]): Map<number, number> {
   const totals = new Map<number, number>();
   for (const task of tasks) {
     if (task.assigneeId === null) continue;
-    if (task.status === 'todo' || task.status === 'in_progress') continue;
+    if (task.status !== 'done') continue;
     totals.set(task.assigneeId, (totals.get(task.assigneeId) ?? 0) + task.points);
   }
   return totals;
