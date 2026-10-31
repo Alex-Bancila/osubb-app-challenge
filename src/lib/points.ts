@@ -32,3 +32,33 @@ export function leaderboard(
         b.points - a.points || a.volunteer.name.localeCompare(b.volunteer.name, 'ro'),
     );
 }
+
+export interface DepartmentRow {
+  department: string;
+  points: number;
+}
+
+/**
+ * Every department with the points of its volunteers, most points first, then
+ * by name. Same rules as `pointsByVolunteer`. A volunteer without a department
+ * (an empty name) is left out, and so are the points of a task whose assignee
+ * is not in the list.
+ */
+export function pointsByDepartment(
+  volunteers: readonly Volunteer[],
+  tasks: readonly Task[],
+): DepartmentRow[] {
+  const totals = pointsByVolunteer(tasks);
+  const byDepartment = new Map<string, number>();
+  for (const volunteer of volunteers) {
+    const department = volunteer.department.trim();
+    if (department === '') continue;
+    byDepartment.set(
+      department,
+      (byDepartment.get(department) ?? 0) + (totals.get(volunteer.id) ?? 0),
+    );
+  }
+  return [...byDepartment.entries()]
+    .map(([department, points]) => ({ department, points }))
+    .sort((a, b) => b.points - a.points || a.department.localeCompare(b.department, 'ro'));
+}
