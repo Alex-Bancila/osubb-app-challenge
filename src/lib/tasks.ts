@@ -22,8 +22,8 @@ export function isOverdue(task: Task, today: Date): boolean {
 export function sortByDeadline(tasks: readonly Task[]): Task[] {
   return [...tasks].sort((a, b) => {
     if (a.deadline === null && b.deadline === null) return 0;
-    if (a.deadline === null) return -1;
-    if (b.deadline === null) return 1;
+    if (a.deadline === null) return 1;
+    if (b.deadline === null) return -1;
     return a.deadline.localeCompare(b.deadline);
   });
 }
