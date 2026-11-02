@@ -14,15 +14,19 @@ export function filterByStatus(tasks: readonly Task[], status: StatusFilter): Ta
  */
 export function isOverdue(task: Task, today: Date): boolean {
   if (task.deadline === null) return false;
+  if (task.status === 'done' || task.status === 'cancelled') return false;
   return daysUntil(task.deadline, today) < 0;
 }
 
-/** Earliest deadline first; tasks without a deadline go last. */
-export function sortByDeadline(tasks: readonly Task[]): Task[] {
+export const sortByDeadline = (tasks: Task[]): Task[] => {
   return [...tasks].sort((a, b) => {
-    if (a.deadline === null && b.deadline === null) return 0;
-    if (a.deadline === null) return -1;
-    if (b.deadline === null) return 1;
+    // If 'a' has no deadline, move it to the end (return 1)
+    if (a.deadline === null || a.deadline === undefined) return 1;
+    
+    // If 'b' has no deadline, move 'a' ahead of it (return -1)
+    if (b.deadline === null || b.deadline === undefined) return -1;
+    
+    // Otherwise, sort chronologically by date string
     return a.deadline.localeCompare(b.deadline);
   });
-}
+};
