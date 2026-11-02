@@ -1,4 +1,4 @@
-import { leaderboard, pointsByVolunteer } from './points';
+import { leaderboard, pointsByVolunteer, pointsByDepartment } from './points';
 import type { Task, Volunteer } from './types';
 
 function task(overrides: Partial<Task>): Task {
@@ -68,5 +68,61 @@ describe('leaderboard', () => {
   it('orders volunteers with the same points by name', () => {
     const rows = leaderboard(volunteers, []);
     expect(rows.map((row) => row.volunteer.name)).toEqual(['Andrei', 'Bianca', 'Cosmin']);
+  });
+});
+
+describe('pointsByDepartment', () => {
+  it('returns an empty array if there are no volunteers', () => {
+    expect(pointsByDepartment([], [])).toEqual([]);
+  });
+
+  it('aggregates points correctly for each department and sorts descending', () => {
+    const mockVolunteers = [
+      { ...volunteer(1, 'Alice'), department: 'IT' },
+      { ...volunteer(2, 'Bob'), department: 'HR' },
+      { ...volunteer(3, 'Charlie'), department: 'IT' },
+    ];
+
+    const mockTasks = [
+      task({ id: 101, assigneeId: 1, points: 10 }), // Alice (IT) +10
+      task({ id: 102, assigneeId: 2, points: 5 }),  // Bob (HR) +5
+      task({ id: 103, assigneeId: 3, points: 20 }), // Charlie (IT) +20
+    ];
+
+    const result = pointsByDepartment(mockVolunteers, mockTasks);
+
+    expect(result).toEqual([
+      { department: 'IT', points: 30 },
+      { department: 'HR', points: 5 }
+    ]);
+  });
+
+  it('sorts alphabetically when departments have tied points', () => {
+    const mockVolunteers = [
+      { ...volunteer(1, 'Alice'), department: 'PR' },
+      { ...volunteer(2, 'Bob'), department: 'FR' },
+    ];
+
+    const result = pointsByDepartment(mockVolunteers, []);
+
+    expect(result.map(r => r.department)).toEqual(['FR', 'PR']);
+  });
+
+  it('ignores points and departments for volunteers with null or empty department strings', () => {
+    const mockVolunteers = [
+      { ...volunteer(1, 'Alice'), department: '' },
+      { ...volunteer(2, 'Bob'), department: 'HR' },
+    ];
+
+    const mockTasks = [
+      task({ id: 101, assigneeId: 1, points: 50 }),
+      task({ id: 102, assigneeId: 2, points: 10 }),
+    ];
+
+    const result = pointsByDepartment(mockVolunteers, mockTasks);
+
+    expect(result).toEqual([
+      { department: 'HR', points: 10 }
+    ]);
   });
 });

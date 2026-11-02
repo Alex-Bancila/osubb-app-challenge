@@ -1,4 +1,4 @@
-import { Volunteer } from '../types';
+import { Volunteer } from './types';
 
 
 export function matchesVolunteer(volunteer: Volunteer, query: string): boolean {
