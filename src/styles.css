@@ -1,4 +1,5 @@
 :root {
+  color-scheme: light;
   --red: #e30613;
   --text: #1c1b1f;
   --muted: #6b6a72;
@@ -18,6 +19,24 @@
   background: var(--background);
 }
 
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --red: #ff5964;
+  --text: #f2f2f5;
+  --muted: #b4b4bf;
+  --surface: #232329;
+  --background: #17171c;
+  --border: #41414c;
+  --success-bg: #193c29;
+  --success-text: #8ce5aa;
+  --danger-bg: #491f28;
+  --danger-text: #ffabb3;
+  --info-bg: #1d3153;
+  --info-text: #a5c7ff;
+  --neutral-bg: #303039;
+  --neutral-text: #d2d2dc;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -30,6 +49,14 @@ body {
   max-width: 760px;
   margin: 0 auto;
   padding: 24px 16px 48px;
+}
+
+.header-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
 }
 
 .app-header h1 {
