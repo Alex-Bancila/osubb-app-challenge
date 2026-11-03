@@ -14,6 +14,8 @@ export function filterByStatus(tasks: readonly Task[], status: StatusFilter): Ta
  */
 export function isOverdue(task: Task, today: Date): boolean {
   if (task.deadline === null) return false;
+  if (task.status === "done") return false;
+  if (task.status === "cancelled") return false
   return daysUntil(task.deadline, today) < 0;
 }
 
