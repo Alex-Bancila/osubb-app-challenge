@@ -1,4 +1,4 @@
-import { leaderboard, pointsByVolunteer } from './points';
+import { leaderboard, pointsByDepartment, pointsByVolunteer } from './points';
 import type { Task, Volunteer } from './types';
 
 function task(overrides: Partial<Task>): Task {
@@ -13,8 +13,8 @@ function task(overrides: Partial<Task>): Task {
   };
 }
 
-function volunteer(id: number, name: string): Volunteer {
-  return { id, name, nickname: null, department: 'IT', role: 'Voluntar' };
+function volunteer(id: number, name: string, department = 'IT'): Volunteer {
+  return { id, name, nickname: null, department, role: 'Voluntar' };
 }
 
 describe('pointsByVolunteer', () => {
@@ -47,6 +47,61 @@ describe('pointsByVolunteer', () => {
   it('ignores a task nobody is assigned to', () => {
     const totals = pointsByVolunteer([task({ assigneeId: null, points: 10 })]);
     expect(totals.size).toBe(0);
+  });
+});
+
+describe('pointsByDepartment', () => {
+  const volunteers = [
+    volunteer(1, 'Bianca', 'Financiar'),
+    volunteer(2, 'Andrei', 'IT'),
+    volunteer(3, 'Cosmin', 'IT'),
+  ];
+
+  it('adds up points across volunteers and lists the highest total first', () => {
+    const rows = pointsByDepartment(volunteers, [
+      task({ id: 1, assigneeId: 1, points: 20 }),
+      task({ id: 2, assigneeId: 2, points: 10 }),
+      task({ id: 3, assigneeId: 3, points: 15 }),
+    ]);
+    expect(rows).toEqual([
+      { department: 'IT', points: 25 },
+      { department: 'Financiar', points: 20 },
+    ]);
+  });
+
+  it('counts only completed tasks assigned to a listed volunteer', () => {
+    const rows = pointsByDepartment(volunteers, [
+      task({ id: 1, status: 'todo' }),
+      task({ id: 2, status: 'in_progress' }),
+      task({ id: 3, status: 'cancelled' }),
+      task({ id: 4, assigneeId: null }),
+      task({ id: 5, assigneeId: 99 }),
+      task({ id: 6, assigneeId: 2, points: 5 }),
+    ]);
+    expect(rows).toEqual([
+      { department: 'IT', points: 5 },
+      { department: 'Financiar', points: 0 },
+    ]);
+  });
+
+  it('includes every department with zero points when there are no tasks', () => {
+    expect(pointsByDepartment(volunteers, [])).toEqual([
+      { department: 'Financiar', points: 0 },
+      { department: 'IT', points: 0 },
+    ]);
+  });
+
+  it('orders departments with the same points by name', () => {
+    const tied = [volunteer(1, 'Ana', 'IT'), volunteer(2, 'Dan', 'Educațional')];
+    const rows = pointsByDepartment(tied, [
+      task({ id: 1, assigneeId: 1, points: 10 }),
+      task({ id: 2, assigneeId: 2, points: 10 }),
+    ]);
+    expect(rows.map((row) => row.department)).toEqual(['Educațional', 'IT']);
+  });
+
+  it('returns an empty list when there are no volunteers', () => {
+    expect(pointsByDepartment([], [task({})])).toEqual([]);
   });
 });
 
