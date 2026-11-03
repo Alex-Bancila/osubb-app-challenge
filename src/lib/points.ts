@@ -7,6 +7,7 @@ export interface LeaderboardRow {
 
 export interface DepartmentRow {
   department: string;
+  volunteerCount: number;
   points: number;
 }
 
@@ -30,13 +31,16 @@ export function pointsByDepartment(
   tasks: readonly Task[],
 ): DepartmentRow[] {
   const volunteerPoints = pointsByVolunteer(tasks);
-  const totals = new Map<string, number>();
+  const totals = new Map<string, DepartmentRow>();
   for (const volunteer of volunteers) {
     const points = volunteerPoints.get(volunteer.id) ?? 0;
     const department = volunteer.department;
-    totals.set(department, (totals.get(department) ?? 0) + points);
+    const row = totals.get(department) ?? { department, points: 0, volunteerCount: 0 };
+    row.points += points;
+    row.volunteerCount += 1;
+    totals.set(department, row);
   }
-  return Array.from(totals, ([department, points]) => ({ department, points }))
+  return Array.from(totals.values())
     .sort((a, b) => b.points - a.points || a.department.localeCompare(b.department, 'ro'));
 }
 

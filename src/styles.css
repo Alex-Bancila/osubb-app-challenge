@@ -179,6 +179,10 @@ body {
   font-weight: 400;
 }
 
+.leaderboard {
+  margin-top: 12px;
+}
+
 .leaderboard-row {
   display: flex;
   align-items: center;
@@ -189,6 +193,11 @@ body {
   width: 32px;
   font-weight: 700;
   color: var(--red);
+}
+
+.leaderboard[data-view='departments'] > :first-child {
+  background: #fff9ec;
+  border-color: #e5c985;
 }
 
 .leaderboard-name {

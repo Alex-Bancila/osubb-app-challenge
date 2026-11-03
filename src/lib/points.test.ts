@@ -64,8 +64,8 @@ describe('pointsByDepartment', () => {
       task({ id: 3, assigneeId: 3, points: 15 }),
     ]);
     expect(rows).toEqual([
-      { department: 'IT', points: 25 },
-      { department: 'Financiar', points: 20 },
+      { department: 'IT', points: 25, volunteerCount: 2 },
+      { department: 'Financiar', points: 20, volunteerCount: 1 },
     ]);
   });
 
@@ -79,15 +79,15 @@ describe('pointsByDepartment', () => {
       task({ id: 6, assigneeId: 2, points: 5 }),
     ]);
     expect(rows).toEqual([
-      { department: 'IT', points: 5 },
-      { department: 'Financiar', points: 0 },
+      { department: 'IT', points: 5, volunteerCount: 2 },
+      { department: 'Financiar', points: 0, volunteerCount: 1 },
     ]);
   });
 
   it('includes every department with zero points when there are no tasks', () => {
     expect(pointsByDepartment(volunteers, [])).toEqual([
-      { department: 'Financiar', points: 0 },
-      { department: 'IT', points: 0 },
+      { department: 'Financiar', points: 0, volunteerCount: 1 },
+      { department: 'IT', points: 0, volunteerCount: 2 },
     ]);
   });
 
