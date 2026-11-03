@@ -10,5 +10,17 @@ import type { Volunteer } from './types';
 export function matchesVolunteer(volunteer: Volunteer, query: string): boolean {
   void volunteer;
   void query;
-  return true;
+  if(query.trim()==='')
+    return true;
+  
+  if(volunteer.name.toLowerCase().includes(query.toLowerCase()))
+    return true;
+  if(volunteer.nickname && volunteer.nickname.toLowerCase().includes(query.toLowerCase()))
+    return true;
+  if(volunteer.name.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().includes(query.toLowerCase()))
+    return true;
+
+  return false;
 }
+
+

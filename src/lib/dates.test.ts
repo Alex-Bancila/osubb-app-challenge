@@ -1,4 +1,4 @@
-import { daysUntil, formatDate } from './dates';
+import { daysUntil, formatDate } from './dates.js';
 
 describe('formatDate', () => {
   it('writes the day, the month and the year as DD.MM.YYYY', () => {
