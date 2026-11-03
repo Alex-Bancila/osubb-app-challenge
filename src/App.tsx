@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
+import { Monitor, Moon, Sun } from 'lucide-react';
 import tasksData from './data/tasks.json';
 import volunteersData from './data/volunteers.json';
 import { Leaderboard } from './components/Leaderboard';
@@ -11,6 +12,25 @@ const volunteers = volunteersData as Volunteer[];
 
 type Tab = 'tasks' | 'volunteers' | 'leaderboard';
 
+const themes = [
+  { id: 'light', label: 'Temă luminoasă', icon: Sun },
+  { id: 'dark', label: 'Temă întunecată', icon: Moon },
+  { id: 'system', label: 'Tema sistemului', icon: Monitor },
+] as const;
+
+type Theme = typeof themes[number]['id'];
+const themeKey = 'osubb-theme';
+const systemTheme = window.matchMedia('(prefers-color-scheme: dark)');
+
+function readTheme(): Theme {
+  try {
+    const saved = localStorage.getItem(themeKey);
+    return saved === 'dark' || saved === 'light' ? saved : 'system';
+  } catch {
+    return 'system';
+  }
+}
+
 const tabs: { id: Tab; label: string }[] = [
   { id: 'tasks', label: 'Taskuri' },
   { id: 'volunteers', label: 'Voluntari' },
@@ -19,12 +39,52 @@ const tabs: { id: Tab; label: string }[] = [
 
 export default function App() {
   const [tab, setTab] = useState<Tab>('tasks');
+  const [theme, setTheme] = useState(readTheme);
+  const [systemDark, setSystemDark] = useState(systemTheme.matches);
+  const dark = theme === 'system' ? systemDark : theme === 'dark';
   const today = new Date();
+
+  useEffect(() => {
+    const update = () => setSystemDark(systemTheme.matches);
+    systemTheme.addEventListener('change', update);
+    update();
+    return () => systemTheme.removeEventListener('change', update);
+  }, []);
+
+  useLayoutEffect(() => {
+    document.documentElement.dataset.theme = dark ? 'dark' : 'light';
+  }, [dark]);
+
+  function chooseTheme(next: Theme) {
+    setTheme(next);
+    try {
+      localStorage.setItem(themeKey, next);
+    } catch {
+      // The choice still applies for this visit if storage is unavailable.
+    }
+  }
 
   return (
     <div className="app">
       <header className="app-header">
-        <h1>Mini Task Tracker</h1>
+        <div className="header-row">
+          <h1>Mini Task Tracker</h1>
+          <div className="theme-options" role="group" aria-label="Temă">
+            {themes.map(({ id, label, icon: Icon }) => (
+              <button
+                key={id}
+                type="button"
+                className="theme-button"
+                aria-label={label}
+                title={label}
+                aria-pressed={theme === id}
+                onClick={() => chooseTheme(id)}
+              >
+                <Icon size={18} aria-hidden="true" />
+              </button>
+            ))}
+          </div>
+        </div>
         <p className="app-subtitle">
           Echipa IT OSUBB · {tasks.length} taskuri · {tasks.length} voluntari
         </p>
