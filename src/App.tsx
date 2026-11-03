@@ -5,12 +5,14 @@ import volunteersData from './data/volunteers.json';
 import { Leaderboard } from './components/Leaderboard';
 import { TaskList } from './components/TaskList';
 import { VolunteerList } from './components/VolunteerList';
+import { readPreference, savePreference } from './lib/preferences';
 import type { Task, Volunteer } from './lib/types';
 
 const tasks = tasksData as Task[];
 const volunteers = volunteersData as Volunteer[];
 
 type Tab = 'tasks' | 'volunteers' | 'leaderboard';
+const tabKey = 'osubb-active-tab';
 
 const themes = [
   { id: 'light', label: 'Temă luminoasă', icon: Sun },
@@ -38,7 +40,10 @@ const tabs: { id: Tab; label: string }[] = [
 ];
 
 export default function App() {
-  const [tab, setTab] = useState<Tab>('tasks');
+  const [tab, setTab] = useState<Tab>(() => {
+    const saved = readPreference(tabKey);
+    return tabs.find((item) => item.id === saved)?.id ?? 'tasks';
+  });
   const [theme, setTheme] = useState(readTheme);
   const [systemDark, setSystemDark] = useState(systemTheme.matches);
   const dark = theme === 'system' ? systemDark : theme === 'dark';
@@ -54,6 +59,11 @@ export default function App() {
   useLayoutEffect(() => {
     document.documentElement.dataset.theme = dark ? 'dark' : 'light';
   }, [dark]);
+
+  function chooseTab(next: Tab) {
+    setTab(next);
+    savePreference(tabKey, next);
+  }
 
   function chooseTheme(next: Theme) {
     setTheme(next);
@@ -97,7 +107,7 @@ export default function App() {
             type="button"
             className={item.id === tab ? 'tab tab-active' : 'tab'}
             aria-pressed={item.id === tab}
-            onClick={() => setTab(item.id)}
+            onClick={() => chooseTab(item.id)}
           >
             {item.label}
           </button>
