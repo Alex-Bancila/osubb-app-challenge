@@ -76,7 +76,8 @@ body {
   font-weight: 600;
 }
 
-.field select {
+.field select,
+.field input {
   padding: 8px 10px;
   border: 1px solid var(--border);
   border-radius: 8px;

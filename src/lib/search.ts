@@ -7,8 +7,14 @@ import type { Volunteer } from './types';
  *
  * Not built yet: see TASKS.md, task B5.
  */
+function fold(text: string): string {
+  return text.normalize('NFD').replace(/\p{M}/gu, '').toLowerCase();
+}
+
 export function matchesVolunteer(volunteer: Volunteer, query: string): boolean {
-  void volunteer;
-  void query;
-  return true;
+  const needle = fold(query.trim());
+  if (needle === '') return true;
+  if (fold(volunteer.name).includes(needle)) return true;
+  if (volunteer.nickname !== null && fold(volunteer.nickname).includes(needle)) return true;
+  return false;
 }

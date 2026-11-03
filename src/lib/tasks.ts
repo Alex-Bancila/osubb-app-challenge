@@ -14,6 +14,8 @@ export function filterByStatus(tasks: readonly Task[], status: StatusFilter): Ta
  */
 export function isOverdue(task: Task, today: Date): boolean {
   if (task.deadline === null) return false;
+  if (task.status === "done") return false;
+  if (task.status === "cancelled") return false
   return daysUntil(task.deadline, today) < 0;
 }
 
@@ -21,8 +23,8 @@ export function isOverdue(task: Task, today: Date): boolean {
 export function sortByDeadline(tasks: readonly Task[]): Task[] {
   return [...tasks].sort((a, b) => {
     if (a.deadline === null && b.deadline === null) return 0;
-    if (a.deadline === null) return -1;
-    if (b.deadline === null) return 1;
+    if (a.deadline === null) return 1;
+    if (b.deadline === null) return -1;
     return a.deadline.localeCompare(b.deadline);
   });
 }
