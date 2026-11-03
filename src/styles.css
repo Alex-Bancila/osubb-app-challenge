@@ -1,4 +1,5 @@
 :root {
+  color-scheme: light dark;
   --red: #e30613;
   --text: #1c1b1f;
   --muted: #6b6a72;
@@ -13,9 +14,32 @@
   --info-text: #1d4ed8;
   --neutral-bg: #ececf0;
   --neutral-text: #4a4950;
+  --winner-bg: #fff9ec;
+  --winner-border: #e5c985;
   font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
   color: var(--text);
   background: var(--background);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --red: #ff797f;
+    --text: #f2f1f4;
+    --muted: #b7b5bf;
+    --surface: #25242a;
+    --background: #19181d;
+    --border: #45434c;
+    --success-bg: #203e2a;
+    --success-text: #a3e5b5;
+    --danger-bg: #49282d;
+    --danger-text: #ffb2b6;
+    --info-bg: #233654;
+    --info-text: #accaff;
+    --neutral-bg: #34323a;
+    --neutral-text: #d1cfd7;
+    --winner-bg: #393222;
+    --winner-border: #806a3b;
+  }
 }
 
 * {
@@ -196,8 +220,8 @@ body {
 }
 
 .leaderboard[data-view='departments'] > :first-child {
-  background: #fff9ec;
-  border-color: #e5c985;
+  background: var(--winner-bg);
+  border-color: var(--winner-border);
 }
 
 .leaderboard-name {
