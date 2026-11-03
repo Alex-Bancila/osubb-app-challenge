@@ -3,14 +3,20 @@ const MS_PER_DAY = 24 * 60 * 60 * 1000;
 /** Reads an ISO date (YYYY-MM-DD) as a local calendar day. */
 function parseDay(iso: string): Date {
   const [year, month, day] = iso.split('-').map(Number);
-  return new Date(year, month - 1, day);
+
+  
+  return new Date(year, (month-1) , day);
+  
+ 
 }
 
 /** Formats an ISO date (YYYY-MM-DD) the Romanian way: DD.MM.YYYY. */
 export function formatDate(iso: string): string {
+ 
   const date = parseDay(iso);
+  
   const day = String(date.getDate()).padStart(2, '0');
-  const month = String(date.getMonth()).padStart(2, '0');
+  const month = String(date.getMonth()+1).padStart(2, '0');
   return `${day}.${month}.${date.getFullYear()}`;
 }
 

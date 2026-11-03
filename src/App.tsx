@@ -14,7 +14,7 @@ type Tab = 'tasks' | 'volunteers' | 'leaderboard';
 const tabs: { id: Tab; label: string }[] = [
   { id: 'tasks', label: 'Taskuri' },
   { id: 'volunteers', label: 'Voluntari' },
-  { id: 'leaderboard', label: 'Clasamnet' },
+  { id: 'leaderboard', label: 'Clasament' },
 ];
 
 export default function App() {
@@ -26,7 +26,7 @@ export default function App() {
       <header className="app-header">
         <h1>Mini Task Tracker</h1>
         <p className="app-subtitle">
-          Echipa IT OSUBB · {tasks.length} taskuri · {tasks.length} voluntari
+          Echipa IT OSUBB · {tasks.length} taskuri · {volunteers.length} voluntari
         </p>
       </header>
 

@@ -11,8 +11,8 @@ const labels: Record<TaskStatus, string> = {
 const colours: Record<TaskStatus, string> = {
   todo: 'badge badge-neutral',
   in_progress: 'badge badge-info',
-  done: 'badge badge-danger',
-  cancelled: 'badge badge-success',
+  done: 'badge badge-success',
+  cancelled: 'badge badge-danger',
 };
 
 export function StatusBadge({ status }: { status: TaskStatus }) {
