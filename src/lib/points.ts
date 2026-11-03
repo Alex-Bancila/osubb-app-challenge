@@ -5,6 +5,12 @@ export interface LeaderboardRow {
   points: number;
 }
 
+export interface DepartmentRow {
+  department: string;
+  volunteerCount: number;
+  points: number;
+}
+
 /**
  * Points earned by each volunteer. Only a task that is done earns its points,
  * and only for the volunteer it is assigned to.
@@ -13,10 +19,29 @@ export function pointsByVolunteer(tasks: readonly Task[]): Map<number, number> {
   const totals = new Map<number, number>();
   for (const task of tasks) {
     if (task.assigneeId === null) continue;
-    if (task.status === 'todo' || task.status === 'in_progress') continue;
+    if (task.status !== 'done') continue;
     totals.set(task.assigneeId, (totals.get(task.assigneeId) ?? 0) + task.points);
   }
   return totals;
+}
+
+/** Every department with its volunteers' points, most points first, then by name. */
+export function pointsByDepartment(
+  volunteers: readonly Volunteer[],
+  tasks: readonly Task[],
+): DepartmentRow[] {
+  const volunteerPoints = pointsByVolunteer(tasks);
+  const totals = new Map<string, DepartmentRow>();
+  for (const volunteer of volunteers) {
+    const points = volunteerPoints.get(volunteer.id) ?? 0;
+    const department = volunteer.department;
+    const row = totals.get(department) ?? { department, points: 0, volunteerCount: 0 };
+    row.points += points;
+    row.volunteerCount += 1;
+    totals.set(department, row);
+  }
+  return Array.from(totals.values())
+    .sort((a, b) => b.points - a.points || a.department.localeCompare(b.department, 'ro'));
 }
 
 /** Every volunteer with their points, most points first, then by name. */

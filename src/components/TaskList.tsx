@@ -1,8 +1,11 @@
 import { useState } from 'react';
+import { readPreference, savePreference } from '../lib/preferences';
 import { formatDate } from '../lib/dates';
 import { filterByStatus, isOverdue, sortByDeadline, type StatusFilter } from '../lib/tasks';
 import type { Task, Volunteer } from '../lib/types';
 import { StatusBadge } from './StatusBadge';
+
+const statusKey = 'osubb-task-status';
 
 const filters: { value: StatusFilter; label: string }[] = [
   { value: 'all', label: 'Toate' },
@@ -19,18 +22,26 @@ interface TaskListProps {
 }
 
 export function TaskList({ tasks, volunteers, today }: TaskListProps) {
-  const [status, setStatus] = useState<StatusFilter>('all');
+  const [status, setStatus] = useState<StatusFilter>(() => {
+    const saved = readPreference(statusKey);
+    return filters.find((filter) => filter.value === saved)?.value ?? 'all';
+  });
   const shown = sortByDeadline(filterByStatus(tasks, status));
   const nameOf = (id: number | null) => {
     const volunteer = volunteers.find((v) => v.id === id);
     return volunteer ? (volunteer.nickname ?? volunteer.name) : 'Neatribuit';
   };
 
+  function chooseStatus(next: StatusFilter) {
+    setStatus(next);
+    savePreference(statusKey, next);
+  }
+
   return (
     <section>
       <label className="field">
         <span>Status</span>
-        <select value={status} onChange={(event) => setStatus(event.target.value as StatusFilter)}>
+        <select value={status} onChange={(event) => chooseStatus(event.target.value as StatusFilter)}>
           {filters.map((filter) => (
             <option key={filter.value} value={filter.value}>
               {filter.label}
