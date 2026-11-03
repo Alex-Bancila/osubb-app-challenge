@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { leaderboard } from '../lib/points';
 import type { Task, Volunteer } from '../lib/types';
 
@@ -7,7 +8,7 @@ interface LeaderboardProps {
 }
 
 export function Leaderboard({ tasks, volunteers }: LeaderboardProps) {
-  const rows = leaderboard(volunteers, tasks);
+  const rows = useMemo(() => leaderboard(volunteers, tasks), [volunteers, tasks]);
 
   return (
     <section>

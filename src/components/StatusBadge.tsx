@@ -7,12 +7,11 @@ const labels: Record<TaskStatus, string> = {
   cancelled: 'Anulat',
 };
 
-/** Green means finished well, red means a problem, grey and blue are open. */
 const colours: Record<TaskStatus, string> = {
   todo: 'badge badge-neutral',
   in_progress: 'badge badge-info',
-  done: 'badge badge-danger',
-  cancelled: 'badge badge-success',
+  done: 'badge badge-success',
+  cancelled: 'badge badge-danger',
 };
 
 export function StatusBadge({ status }: { status: TaskStatus }) {

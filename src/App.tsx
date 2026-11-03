@@ -8,35 +8,57 @@ import type { Task, Volunteer } from './lib/types';
 
 const tasks = tasksData as Task[];
 const volunteers = volunteersData as Volunteer[];
+const FIXED_TODAY = new Date();
 
 type Tab = 'tasks' | 'volunteers' | 'leaderboard';
 
 const tabs: { id: Tab; label: string }[] = [
   { id: 'tasks', label: 'Taskuri' },
   { id: 'volunteers', label: 'Voluntari' },
-  { id: 'leaderboard', label: 'Clasamnet' },
+  { id: 'leaderboard', label: 'Clasament' },
 ];
 
 export default function App() {
   const [tab, setTab] = useState<Tab>('tasks');
-  const today = new Date();
+  const [darkMode, setDarkMode] = useState<boolean>(false);
+
+  const toggleTheme = () => {
+    const nextMode = !darkMode;
+    setDarkMode(nextMode);
+
+    if (nextMode) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  };
 
   return (
     <div className="app">
       <header className="app-header">
-        <h1>Mini Task Tracker</h1>
-        <p className="app-subtitle">
-          Echipa IT OSUBB · {tasks.length} taskuri · {tasks.length} voluntari
-        </p>
+        <div>
+          <h1>Mini Task Tracker</h1>
+          <p className="app-subtitle">
+            Echipa IT OSUBB · {tasks.length} taskuri · {volunteers.length} voluntari
+          </p>
+        </div>
+        <button
+          type="button"
+          className="theme-toggle"
+          onClick={toggleTheme}
+        >
+          {darkMode ? '🌙 Dark' : '☀️ Light'}
+        </button>
       </header>
 
-      <nav className="tabs" aria-label="Secțiuni">
+      <nav className="tabs" role="tablist" aria-label="Secțiuni">
         {tabs.map((item) => (
           <button
             key={item.id}
             type="button"
+            role="tab"
             className={item.id === tab ? 'tab tab-active' : 'tab'}
-            aria-pressed={item.id === tab}
+            aria-selected={item.id === tab}
             onClick={() => setTab(item.id)}
           >
             {item.label}
@@ -45,7 +67,7 @@ export default function App() {
       </nav>
 
       <main>
-        {tab === 'tasks' && <TaskList tasks={tasks} volunteers={volunteers} today={today} />}
+        {tab === 'tasks' && <TaskList tasks={tasks} volunteers={volunteers} today={FIXED_TODAY} />}
         {tab === 'volunteers' && <VolunteerList volunteers={volunteers} />}
         {tab === 'leaderboard' && <Leaderboard tasks={tasks} volunteers={volunteers} />}
       </main>
