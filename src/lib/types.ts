@@ -20,3 +20,19 @@ export interface Volunteer {
   department: string;
   role: string;
 }
+
+// export interface Department {
+//   id: number;
+//   name: string;
+//   count: number; /** meant to represent how many people there are */
+//   /** we might also need a list to represent the department. keyword: **might**. */
+//   /** unsure about allocating a variable stocking the total amount of points. it can always change, can't it? */
+// }
+
+
+export interface Department {
+  id: number;
+  name: string;
+  members: Volunteer[];
+  /** might need to declare the points sum too? */
+}

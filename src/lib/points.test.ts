@@ -1,4 +1,5 @@
-import { leaderboard, pointsByVolunteer } from './points';
+import { VolunteerList } from '../components/VolunteerList';
+import { leaderboard, pointsByDepartment, pointsByVolunteer } from './points';
 import type { Task, Volunteer } from './types';
 
 function task(overrides: Partial<Task>): Task {
@@ -68,5 +69,34 @@ describe('leaderboard', () => {
   it('orders volunteers with the same points by name', () => {
     const rows = leaderboard(volunteers, []);
     expect(rows.map((row) => row.volunteer.name)).toEqual(['Andrei', 'Bianca', 'Cosmin']);
+  });
+});
+
+
+describe('pointsByDepartment', () => {
+  it('adds up the points of done tasks', () => {
+    const volunteers = [
+      volunteer(1, 'Alexia'), 
+      volunteer(2, 'Marius'), 
+      volunteer(3, 'Sara')
+    ];
+    
+    const departments = [
+      { id: 1, name: 'Imagine & PR', members: ['Alexia', 'Marius'] },
+      { id: 2, name: 'Financiar', members: ['Sara'] }
+    ];
+
+    const tasks = [
+      task({ id: 1, assigneeId: 1, points: 15, status: 'done' }),
+      task({ id: 2, assigneeId: 3, points: 5, status: 'done' }),
+      task({ id: 3, assigneeId: 1, points: 2, status: 'done' }),
+      task({ id: 4, assigneeId: 2, points: 20, status: 'done' }),
+      task({ id: 5, assigneeId: 2, points: 5, status: 'done' })
+    ];
+
+    const totals = pointsByDepartment(tasks, volunteers, departments);
+    
+    expect(totals.get(1)).toBe(42);
+    expect(totals.get(2)).toBe(5);
   });
 });

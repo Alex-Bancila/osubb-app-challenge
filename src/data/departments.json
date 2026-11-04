@@ -1,0 +1,31 @@
+[
+    {
+        "id": 1,
+        "name": "Imagine & PR"
+    },
+
+    {
+        "id": 2,
+        "name": "Financiar"
+    }
+
+    {
+        "id": 3,
+        "name": "Tineret"
+    },
+    
+    {
+        "id": 4,
+        "name": "Resurse Umane"
+    },
+    
+    {
+        "id": 5,
+        "name": "Educațional"
+    },
+
+    {
+        "id": 6,
+        "name": "IT"
+    }
+]
